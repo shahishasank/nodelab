@@ -1,0 +1,618 @@
+// C++ program for implementation of Heap Sort
+#include <iostream>
+using namespace std;
+ 
+// To heapify a subtree rooted with node i which is
+// an index in arr[]. n is size of heap
+void heapify(int arr[], int n, int i)
+{
+    int largest = i;  // Initialize largest as root
+    int l = 2*i + 1;  // left = 2*i + 1
+    int r = 2*i + 2;  // right = 2*i + 2
+ 
+    // If left child is larger than root
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+ 
+    // If right child is larger than largest so far
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+ 
+    // If largest is not root
+    if (largest != i)
+    {
+        swap(arr[i], arr[largest]);
+ 
+        // Recursively heapify the affected sub-tree
+        heapify(arr, n, largest);
+    }
+}
+ 
+// main function to do heap sort
+void heapSort(int arr[], int n)
+{
+    // Build heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+ 
+    // One by one extract an element from heap
+    for (int i=n-1; i>=0; i--)
+    {
+        // Move current root to end
+        swap(arr[0], arr[i]);
+ 
+        // call max heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+}
+ 
+/* A utility function to print array of size n */
+void printArray(int arr[], int n)
+{
+    for (int i=0; i<n; ++i)
+        cout << arr[i] << " ";
+    cout << "\n";
+}
+ 
+// Driver program
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    heapSort(arr, n);
+ 
+    cout << "Sorted array is \n";
+    printArray(arr, n);
+}
+
+
+
+
+
+
+/* C implementation QuickSort */
+#include<stdio.h>
+ 
+// A utility function to swap two elements
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
+}
+ 
+/* This function takes last element as pivot, places
+   the pivot element at its correct position in sorted
+    array, and places all smaller (smaller than pivot)
+   to left of pivot and all greater elements to right
+   of pivot */
+int partition (int arr[], int low, int high)
+{
+    int pivot = arr[high];    // pivot
+    int i = (low - 1);  // Index of smaller element
+ 
+    for (int j = low; j <= high- 1; j++)
+    {
+        // If current element is smaller than or
+        // equal to pivot
+        if (arr[j] <= pivot)
+        {
+            i++;    // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+ 
+/* The main function that implements QuickSort
+ arr[] --> Array to be sorted,
+  low  --> Starting index,
+  high  --> Ending index */
+void quickSort(int arr[], int low, int high)
+{
+    if (low < high)
+    {
+        /* pi is partitioning index, arr[p] is now
+           at right place */
+        int pi = partition(arr, low, high);
+ 
+        // Separately sort elements before
+        // partition and after partition
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+ 
+/* Function to print an array */
+void printArray(int arr[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("n");
+}
+ 
+// Driver program to test above functions
+int main()
+{
+    int arr[] = {10, 7, 8, 9, 1, 5};
+    int n = sizeof(arr)/sizeof(arr[0]);
+    quickSort(arr, 0, n-1);
+    printf("Sorted array: n");
+    printArray(arr, n);
+    return 0;
+}
+
+
+
+
+
+// C++ program for implementation of Heap Sort
+#include <iostream>
+using namespace std;
+ 
+// To heapify a subtree rooted with node i which is
+// an index in arr[]. n is size of heap
+void heapify(int arr[], int n, int i)
+{
+    int largest = i;  // Initialize largest as root
+    int l = 2*i + 1;  // left = 2*i + 1
+    int r = 2*i + 2;  // right = 2*i + 2
+ 
+    // If left child is larger than root
+    if (l < n && arr[l] > arr[largest])
+        largest = l;
+ 
+    // If right child is larger than largest so far
+    if (r < n && arr[r] > arr[largest])
+        largest = r;
+ 
+    // If largest is not root
+    if (largest != i)
+    {
+        swap(arr[i], arr[largest]);
+ 
+        // Recursively heapify the affected sub-tree
+        heapify(arr, n, largest);
+    }
+}
+ 
+// main function to do heap sort
+void heapSort(int arr[], int n)
+{
+    // Build heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--)
+        heapify(arr, n, i);
+ 
+    // One by one extract an element from heap
+    for (int i=n-1; i>=0; i--)
+    {
+        // Move current root to end
+        swap(arr[0], arr[i]);
+ 
+        // call max heapify on the reduced heap
+        heapify(arr, i, 0);
+    }
+}
+ 
+/* A utility function to print array of size n */
+void printArray(int arr[], int n)
+{
+    for (int i=0; i<n; ++i)
+        cout << arr[i] << " ";
+    cout << "\n";
+}
+ 
+// Driver program
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    heapSort(arr, n);
+ 
+    cout << "Sorted array is \n";
+    printArray(arr, n);
+}
+
+
+
+
+/* C program for Merge Sort */
+#include<stdlib.h>
+#include<stdio.h>
+ 
+// Merges two subarrays of arr[].
+// First subarray is arr[l..m]
+// Second subarray is arr[m+1..r]
+void merge(int arr[], int l, int m, int r)
+{
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+ 
+    /* create temp arrays */
+    int L[n1], R[n2];
+ 
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+ 
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray
+    j = 0; // Initial index of second subarray
+    k = l; // Initial index of merged subarray
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
+        }
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+ 
+    /* Copy the remaining elements of L[], if there
+       are any */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
+ 
+    /* Copy the remaining elements of R[], if there
+       are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
+}
+ 
+/* l is for left index and r is right index of the
+   sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r)
+    {
+        // Same as (l+r)/2, but avoids overflow for
+        // large l and h
+        int m = l+(r-l)/2;
+ 
+        // Sort first and second halves
+        mergeSort(arr, l, m);
+        mergeSort(arr, m+1, r);
+ 
+        merge(arr, l, m, r);
+    }
+}
+ 
+/* UTILITY FUNCTIONS */
+/* Function to print an array */
+void printArray(int A[], int size)
+{
+    int i;
+    for (i=0; i < size; i++)
+        printf("%d ", A[i]);
+    printf("\n");
+}
+ 
+/* Driver program to test above functions */
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int arr_size = sizeof(arr)/sizeof(arr[0]);
+ 
+    printf("Given array is \n");
+    printArray(arr, arr_size);
+ 
+    mergeSort(arr, 0, arr_size - 1);
+ 
+    printf("\nSorted array is \n");
+    printArray(arr, arr_size);
+    return 0;
+}
+
+
+
+
+
+
+// C program for insertion sort
+#include <stdio.h>
+#include <math.h>
+ 
+/* Function to sort an array using insertion sort*/
+void insertionSort(int arr[], int n)
+{
+   int i, key, j;
+   for (i = 1; i < n; i++)
+   {
+       key = arr[i];
+       j = i-1;
+ 
+       /* Move elements of arr[0..i-1], that are
+          greater than key, to one position ahead
+          of their current position */
+       while (j >= 0 && arr[j] > key)
+       {
+           arr[j+1] = arr[j];
+           j = j-1;
+       }
+       arr[j+1] = key;
+   }
+}
+ 
+// A utility function to print an array of size n
+void printArray(int arr[], int n)
+{
+   int i;
+   for (i=0; i < n; i++)
+       printf("%d ", arr[i]);
+   printf("\n");
+}
+ 
+ 
+ 
+/* Driver program to test insertion sort */
+int main()
+{
+    int arr[] = {12, 11, 13, 5, 6};
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    insertionSort(arr, n);
+    printArray(arr, n);
+ 
+    return 0;
+}
+
+
+
+
+
+
+// A C++ program to demonstrate common Binary Heap Operations
+#include<iostream>
+#include<climits>
+using namespace std;
+ 
+// Prototype of a utility function to swap two integers
+void swap(int *x, int *y);
+ 
+// A class for Min Heap
+class MinHeap
+{
+    int *harr; // pointer to array of elements in heap
+    int capacity; // maximum possible size of min heap
+    int heap_size; // Current number of elements in min heap
+public:
+    // Constructor
+    MinHeap(int capacity);
+ 
+    // to heapify a subtree with root at given index
+    void MinHeapify(int );
+ 
+    int parent(int i) { return (i-1)/2; }
+ 
+    // to get index of left child of node at index i
+    int left(int i) { return (2*i + 1); }
+ 
+    // to get index of right child of node at index i
+    int right(int i) { return (2*i + 2); }
+ 
+    // to extract the root which is the minimum element
+    int extractMin();
+ 
+    // Decreases key value of key at index i to new_val
+    void decreaseKey(int i, int new_val);
+ 
+    // Returns the minimum key (key at root) from min heap
+    int getMin() { return harr[0]; }
+ 
+    // Deletes a key stored at index i
+    void deleteKey(int i);
+ 
+    // Inserts a new key 'k'
+    void insertKey(int k);
+};
+ 
+// Constructor: Builds a heap from a given array a[] of given size
+MinHeap::MinHeap(int cap)
+{
+    heap_size = 0;
+    capacity = cap;
+    harr = new int[cap];
+}
+ 
+// Inserts a new key 'k'
+void MinHeap::insertKey(int k)
+{
+    if (heap_size == capacity)
+    {
+        cout << "\nOverflow: Could not insertKey\n";
+        return;
+    }
+ 
+    // First insert the new key at the end
+    heap_size++;
+    int i = heap_size - 1;
+    harr[i] = k;
+ 
+    // Fix the min heap property if it is violated
+    while (i != 0 && harr[parent(i)] > harr[i])
+    {
+       swap(&harr[i], &harr[parent(i)]);
+       i = parent(i);
+    }
+}
+ 
+// Decreases value of key at index 'i' to new_val.  It is assumed that
+// new_val is smaller than harr[i].
+void MinHeap::decreaseKey(int i, int new_val)
+{
+    harr[i] = new_val;
+    while (i != 0 && harr[parent(i)] > harr[i])
+    {
+       swap(&harr[i], &harr[parent(i)]);
+       i = parent(i);
+    }
+}
+ 
+// Method to remove minimum element (or root) from min heap
+int MinHeap::extractMin()
+{
+    if (heap_size <= 0)
+        return INT_MAX;
+    if (heap_size == 1)
+    {
+        heap_size--;
+        return harr[0];
+    }
+ 
+    // Store the minimum value, and remove it from heap
+    int root = harr[0];
+    harr[0] = harr[heap_size-1];
+    heap_size--;
+    MinHeapify(0);
+ 
+    return root;
+}
+ 
+ 
+// This function deletes key at index i. It first reduced value to minus
+// infinite, then calls extractMin()
+void MinHeap::deleteKey(int i)
+{
+    decreaseKey(i, INT_MIN);
+    extractMin();
+}
+ 
+// A recursive method to heapify a subtree with root at given index
+// This method assumes that the subtrees are already heapified
+void MinHeap::MinHeapify(int i)
+{
+    int l = left(i);
+    int r = right(i);
+    int smallest = i;
+    if (l < heap_size && harr[l] < harr[i])
+        smallest = l;
+    if (r < heap_size && harr[r] < harr[smallest])
+        smallest = r;
+    if (smallest != i)
+    {
+        swap(&harr[i], &harr[smallest]);
+        MinHeapify(smallest);
+    }
+}
+ 
+// A utility function to swap two elements
+void swap(int *x, int *y)
+{
+    int temp = *x;
+    *x = *y;
+    *y = temp;
+}
+ 
+// Driver program to test above functions
+int main()
+{
+    MinHeap h(11);
+    h.insertKey(3);
+    h.insertKey(2);
+    h.deleteKey(1);
+    h.insertKey(15);
+    h.insertKey(5);
+    h.insertKey(4);
+    h.insertKey(45);
+    cout << h.extractMin() << " ";
+    cout << h.getMin() << " ";
+    h.decreaseKey(2, 1);
+    cout << h.getMin();
+    return 0;
+}
+
+
+
+
+
+
+// C program to demonstrate insert operation in binary search tree
+#include<stdio.h>
+#include<stdlib.h>
+  
+struct node
+{
+    int key;
+    struct node *left, *right;
+};
+  
+// A utility function to create a new BST node
+struct node *newNode(int item)
+{
+    struct node *temp =  (struct node *)malloc(sizeof(struct node));
+    temp->key = item;
+    temp->left = temp->right = NULL;
+    return temp;
+}
+  
+// A utility function to do inorder traversal of BST
+void inorder(struct node *root)
+{
+    if (root != NULL)
+    {
+        inorder(root->left);
+        printf("%d \n", root->key);
+        inorder(root->right);
+    }
+}
+  
+/* A utility function to insert a new node with given key in BST */
+struct node* insert(struct node* node, int key)
+{
+    /* If the tree is empty, return a new node */
+    if (node == NULL) return newNode(key);
+ 
+    /* Otherwise, recur down the tree */
+    if (key < node->key)
+        node->left  = insert(node->left, key);
+    else if (key > node->key)
+        node->right = insert(node->right, key);   
+ 
+    /* return the (unchanged) node pointer */
+    return node;
+}
+  
+// Driver Program to test above functions
+int main()
+{
+    /* Let us create following BST
+              50
+           /     \
+          30      70
+         /  \    /  \
+       20   40  60   80 */
+    struct node *root = NULL;
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
+  
+    // print inoder traversal of the BST
+    inorder(root);
+  
+    return 0;
+}
